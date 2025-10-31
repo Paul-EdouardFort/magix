@@ -1,0 +1,12 @@
+progressive web apps
+
+fetlife
+
+no communication with phone apis
+
+clickjacking = bad
+brute force attack = bad
+
+file uploads can have code hidden in em
+
+XSS 

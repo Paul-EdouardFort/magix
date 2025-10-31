@@ -9,18 +9,21 @@
 
         protected function executeAction() {
             $data = [];
-            $data["username"] = "Justice Kazzy";
-            $data["password"] = "Undyneissocool42";
+            $data["username"] = $_POST["username"];
+            $data["password"] = $_POST["password"];
 
             $result = parent::callAPI("signin", $data);
+            $error = FALSE;
 			if ($result == "INVALID_USERNAME_PASSWORD") {
-	            $key = 'Ya focking daft?';  // err
+	            $key = "Ya focking daft?";  // err
+                $error = TRUE;
             }
             else {
                 // Pour voir les informations retournées : var_dump($result);exit;
                 $key = $result->key;
+                $_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;
             }
 
-            return compact("key");
+            return compact("key","error");
         }
     }
