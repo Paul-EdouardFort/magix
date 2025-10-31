@@ -9,21 +9,28 @@
 
         protected function executeAction() {
             $data = [];
-            $data["username"] = $_POST["username"];
-            $data["password"] = $_POST["password"];
+            $key = "ERROR";
+            $error = TRUE;
+            if ($_POST["username"] && $_POST["password"]){
+                $data["username"] = $_POST["username"];
+                $data["password"] = $_POST["password"];
 
-            $result = parent::callAPI("signin", $data);
-            $error = FALSE;
-			if ($result == "INVALID_USERNAME_PASSWORD") {
-	            $key = "Ya focking daft?";  // err
-                $error = TRUE;
+                $result = parent::callAPI("signin", $data);
+                $error = FALSE;
+                if ($result == "INVALID_USERNAME_PASSWORD") {
+                    $key = "Ya focking daft?";  // err
+                    $error = TRUE;
+                }
+                else {
+                    // Pour voir les informations retournées : var_dump($result);exit;
+                    $key = $result->key;
+                    $_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;
+                    $_SESSION["key"] = $key;
+                }
+                 
             }
-            else {
-                // Pour voir les informations retournées : var_dump($result);exit;
-                $key = $result->key;
-                $_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;
-            }
-
             return compact("key","error");
+
+           
         }
     }
