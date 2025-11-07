@@ -1,4 +1,9 @@
-#Plan de match
+Questions : 
+1. besoin de pagevisibility quand ce n'est pas une page? 
+
+
+
+# Plan de match
 
 thème osrs 
 

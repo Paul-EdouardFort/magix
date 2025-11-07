@@ -22,12 +22,13 @@
                 $_SESSION["visibility"] = self::$VISIBILITY_PUBLIC;
 			}
 
-            if ($_SESSION["visibility"] < $this->pageVisibility) {
-                header("location:index.php");
-				exit;
-            }
+          //  if ($_SESSION["visibility"] < $this->pageVisibility) {
+          //      header("location:index.php");
+		    //		exit;
+          //  }
 
             $data = $this->executeAction();
+            $data["authorized"] = $_SESSION["visibility"] >= $this->pageVisibility;
             $data["isLoggedIn"] = $_SESSION["visibility"] > self::$VISIBILITY_PUBLIC;
             $data["username"] = $_SESSION["username"] ?? "Invité";
 

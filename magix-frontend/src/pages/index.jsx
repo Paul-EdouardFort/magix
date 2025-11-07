@@ -36,7 +36,7 @@ export default function Index() {
               </label>
               <label>
                 Password:
-                <input type="text" value={loginForm.password} onChange={(e) => {setLoginForm ({...loginForm,password : e.target.value})}} />
+                <input type="password" value={loginForm.password} onChange={(e) => {setLoginForm ({...loginForm,password : e.target.value})}} />
               </label>
               <button type="submit">Login</button>
             </form>
