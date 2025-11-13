@@ -11,6 +11,7 @@ export default function Game() {
     const [gameState, setGameState] = useState(null);
     const [gameOngoing, setGameOngoing] = useState(false)
     const [cards, setCards] = useState(null);
+	const [canMakeAction, setCanMakeAction] = useState(true);
     const navigate = useNavigate();
     const stateTimeout = useRef(null);
     const fetchState = () => {
@@ -21,13 +22,13 @@ export default function Game() {
 		stateTimeout.current = setTimeout(fetchState, 2000);
         setGameState(response["result"])
         if (response["result"] == "WAITING" ){
-            setGameOngoing(false)
+            setGameOngoing(null)
         }
         else if(response["result"] == "LAST_GAME_WON"){
-            setGameOngoing(false)
+            setGameOngoing(null)
         }
         else if(response["result"] == "LAST_GAME_LOST"){
-            setGameOngoing(false)
+            setGameOngoing(null)
         }
         else{ 
             renderCards(response["result"])}
@@ -63,180 +64,94 @@ export default function Game() {
         simpleAction("SURRENDER");
     }
     const simpleAction = (type) => {
-        let formData = new FormData();
-        formData.append("type",type);
-        fetch("/api/gameMove.php", {
-        method : "POST",
-        body : formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
+		if(canMakeAction){
+			setCanMakeAction(false);
+			let formData = new FormData();
+			formData.append("type",type);
+			fetch("/api/gameMove.php", {
+			method : "POST",
+			body : formData
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				setCanMakeAction(true);
+			})
+		}
     }
     const renderCards = (result) => {
         let cards = {};
-        cards["hand"] = []; cards["board"] = []; cards["enemy"] = [];
+        cards["hand"] = []; cards["board"] = []; cards["opponent"] = [];
         result["hand"].forEach(card => {
             cards["hand"].push(<Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
                 uid={card["uid"]} baseHp={card["baseHp"]} onClick={handlePlayHand} ></Card>)
         });
+		result["board"].forEach(card => {
+			cards["board"].push(<Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
+                uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectBoard} ></Card>)
+		});
+		result["opponent"]["board"].forEach(card => {
+			cards["opponent"].push(<Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
+                uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectEnemy} ></Card>)
+		});
          setCards(cards);
     }
-    const handlePlayHand = () => {
-
+    const handlePlayHand = (uid) => {
+		if(canMakeAction){
+			setCanMakeAction(false);
+			let formData = new FormData();
+			formData.append("type","PLAY");
+			formData.append("uid",uid);
+			fetch("/api/gameMove.php", {
+			method : "POST",
+			body : formData
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				setCanMakeAction(true);
+			})
+		}
     }
-    /*
-    {
-	"result": {
-		"stateCounter": 1,
-		"remainingTurnTime": 50,
-		"heroPowerAlreadyUsed": false,
-		"yourTurn": false,
-		"hp": 30,
-		"maxHp": 30,
-		"heroClass": "Priest",
-		"talent": "SpawnMinion",
-		"mp": 0,
-		"maxMp": 1,
-		"hand": [
-			{
-				"id": 79,
-				"cost": 1,
-				"hp": 4,
-				"atk": 0,
-				"mechanics": [
-					"Taunt"
-				],
-				"uid": 2,
-				"baseHP": 4
-			},
-			{
-				"id": 4,
-				"cost": 1,
-				"hp": 1,
-				"atk": 1,
-				"mechanics": [
-					"Charge"
-				],
-				"uid": 3,
-				"baseHP": 1
-			},
-			{
-				"id": 5,
-				"cost": 2,
-				"hp": 3,
-				"atk": 2,
-				"mechanics": [],
-				"uid": 4,
-				"baseHP": 3
-			},
-			{
-				"id": 6,
-				"cost": 2,
-				"hp": 1,
-				"atk": 1,
-				"mechanics": [
-					"Battlecry : Spawn a minion"
-				],
-				"uid": 5,
-				"baseHP": 1
-			},
-			{
-				"id": 1,
-				"cost": 0,
-				"hp": 1,
-				"atk": 0,
-				"mechanics": [
-					"Battlecry : Get 1 crystal (this turn only)"
-				],
-				"uid": 64,
-				"baseHP": 1
-			}
-		],
-		"board": [
-			{
-				"id": 82,
-				"cost": 2,
-				"hp": 2,
-				"atk": 0,
-				"mechanics": [
-					"Stealth",
-					"At the start of your turn, gain +1/+1"
-				],
-				"uid": 62,
-				"baseHP": 2,
-				"state": "IDLE"
-			},
-			{
-				"id": 1,
-				"cost": 0,
-				"hp": 2,
-				"atk": 1,
-				"mechanics": [
-					"Charge",
-					"Taunt"
-				],
-				"uid": 65,
-				"baseHP": 2,
-				"state": "IDLE"
-			}
-		],
-		"remainingCardsCount": 26,
-		"welcomeText": "Undyneissocool42",
-		"opponent": {
-			"username": "Hybrid-AI",
-			"heroClass": "Warlock",
-			"talent": "ExtraCrystal",
-			"trophyCount": 0,
-			"winCount": 0,
-			"lossCount": 0,
-			"hp": 30,
-			"maxHp": 30,
-			"mp": 1,
-			"maxMp": 1,
-			"board": [
-				{
-					"id": 82,
-					"cost": 2,
-					"hp": 3,
-					"atk": 1,
-					"mechanics": [
-						"Stealth",
-						"At the start of your turn, gain +1/+1"
-					],
-					"uid": 63,
-					"baseHP": 3,
-					"state": "IDLE"
-				}
-			],
-			"handSize": 4,
-			"remainingCardsCount": 26,
-			"welcomeText": "Agility is the key"
-		},
-		"latestActions": []
+	const handleSelectBoard = () => {
+
 	}
-}
-    */
-    return <div>
-            GAME
-            {gameState ? ( <div>
-                {gameOngoing ? (<div>
-                    <div>{gameState["remainingTurnTime"]}</div>
-                    <GameValue src={hpOrb} className="" value={gameState["hp"]} maxValue={gameState["maxHp"]}></GameValue>
-                    <GameValue src={prayerOrb} className="" value={gameState["mp"]}> </GameValue>
-                    <GameValue src={deck} className="" value={gameState["remainingCardsCount"]}></GameValue>
-                    <Button text="Special Attack" onClick={handleSpec}></Button>
-                    <Button text="End Turn" onClick={handleEndTurn}></Button>
-                    {cards["hand"]} </div>) 
-                : (<div></div>)}
+	const handleSelectEnemy = () => {
+
+	}
+    return <div className="h-screen w-screen">
+            {gameState ? ( <div className="h-full w-full">
+                {gameOngoing ? (
+				<div className="flex flex-col flex-none h-full w-full">
+					<div className="basis-2/12 flex-none">
+						{gameState["remainingTurnTime"]}
+						<GameValue src={hpOrb} className="w-24 h-24" value={gameState["opponent"]["hp"]} maxValue={gameState["opponent"]["maxHp"]}></GameValue>
+						<GameValue src={prayerOrb} className="w-24 h-24" value={gameState["opponent"]["mp"]} maxValue={gameState["opponent"]["maxMp"]}> </GameValue>
+					</div>
+					{cards ? (<div className="basis-1/4 flex flex-none">{cards["opponent"]} </div>) : (<div className="basis-1/4 flex"></div>)}
+					{cards ? (<div className="basis-1/4 flex flex-none">{cards["board"]} </div>) : (<div className="basis-1/4 flex"></div>)}
+					<div className="basis-1/3 flex flex-none">
+						<div className="basis-1/5 flex-col">
+							<GameValue src={hpOrb} className="w-24 h-24" value={gameState["hp"]} maxValue={gameState["maxHp"]}></GameValue>
+							<GameValue src={prayerOrb} className="w-24 h-24" value={gameState["mp"]} maxValue={gameState["maxMp"]}> </GameValue>
+							<GameValue src={deck} className="w-24 h-30" value={gameState["remainingCardsCount"]}></GameValue>
+						</div>
+						{cards ? (<div className="basis-15/20 flex flex-wrap">{cards["hand"]} </div>) : (<div className="basis-3/5 flex"></div>)}
+						<div className="basis-1/20 flex flex-col">
+							<Button text="Special Attack" onClick={handleSpec}></Button>
+							<Button text="End Turn" onClick={handleEndTurn}></Button>
+						</div>	
+                    </div>
+				</div> ) 
+                : (<div></div>)
+				}
                 </div>
             ) : (
                 <img src={gnomeChild} className="w-24 h-24"></img>
             )}
-            
+			</div>
             
          
           
-          </div> 
+          
 }
