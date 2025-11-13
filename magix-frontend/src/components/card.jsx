@@ -12,7 +12,7 @@ export default function Card({id=0,cost=0,hp=0,atk=0,mechanics=[],uid=0,baseHP,o
             <img className="object-contain w-full h-full" src={card_data["image"]}></img> 
         </div>
         <div className="h-[35%] flex-none text-left overflow-hidden">
-            <p>{id}</p>
+            <p>{cost}</p>
             <p className="text-sm">{mechanics}</p>
         </div>
     </div>

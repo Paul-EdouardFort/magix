@@ -18,7 +18,7 @@ export default function Game() {
 	fetch("/api/game-state.php")
 	.then(response => response.json())
 	.then(response => {
-		console.log(response) // <-- État du jeu, ou message comme : LAST_GAME_WON
+		//console.log(response) // <-- État du jeu, ou message comme : LAST_GAME_WON
 		stateTimeout.current = setTimeout(fetchState, 2000);
         setGameState(response["result"])
         if (response["result"] == "WAITING" ){
@@ -31,11 +31,12 @@ export default function Game() {
             setGameOngoing(null)
         }
         else{ 
-            renderCards(response["result"])}
+            renderCards(response["result"])
+			console.log(response)
              if (!gameOngoing)
                 setGameOngoing(true)
-            }
-    );
+        }
+	});
 }
 
     useEffect(() => {
@@ -143,7 +144,7 @@ export default function Game() {
 						</div>	
                     </div>
 				</div> ) 
-                : (<div></div>)
+                : (<div>{GameState}</div>)
 				}
                 </div>
             ) : (
