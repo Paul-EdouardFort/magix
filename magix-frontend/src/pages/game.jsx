@@ -144,7 +144,7 @@ export default function Game() {
 						</div>	
                     </div>
 				</div> ) 
-                : (<div>{GameState}</div>)
+                : (<div>{gameState}</div>)
 				}
                 </div>
             ) : (
