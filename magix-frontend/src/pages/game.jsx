@@ -1,25 +1,30 @@
 import {useEffect,useState,useRef} from "react";
 import { useNavigate } from "react-router";
+import heroData from "../data/heroData"
 import GameValue from "../components/gamevalue";
 import Button from "../components/button";
 import Card from "../components/card";
-import gnomeChild from '../assets/img/Gnome_child_chathead.png';
+import gnomeChild from '/img/Gnome_child_chathead.png';
 //import hpOrb from '../assets/img/Hitpoints_orb.png';
 //import prayerOrb from '../assets/img/Prayer_orb.png';
 //import deck from '../assets/img/Teleport_card.png';
 export default function Game() {
     const [gameState, setGameState] = useState(null);
     const [gameOngoing, setGameOngoing] = useState(false)
-    const [cards, setCards] = useState(null);
 	const [canMakeAction, setCanMakeAction] = useState(true);
 	const [selectedCard, setSelectedCard] = useState(null);
+	const [opponent, setOpponent] = useState(null);
+	//const [clientTime , setClientTime] = useState(null)
+	//const timeTimeout = useRef(null);
     const navigate = useNavigate();
+
     const stateTimeout = useRef(null);
     const fetchState = () => {
 	fetch("/api/game-state.php")
 	.then(response => response.json())
 	.then(response => {
 		//console.log(response) // <-- État du jeu, ou message comme : LAST_GAME_WON
+		if (stateTimeout.current) clearTimeout(stateTimeout.current);
 		stateTimeout.current = setTimeout(fetchState, 2000);
         setGameState(response["result"])
         if (response["result"] == "WAITING" ){
@@ -32,8 +37,9 @@ export default function Game() {
             setGameOngoing(null)
         }
         else{ 
-            //renderCards(response["result"])
+            // setClientTime(response["result"]["remainingTurnTime"]);
 			console.log(response)
+			setOpponent(heroData(response["result"]["opponent"]["heroClass"]));
              if (!gameOngoing)
                 setGameOngoing(true)
         }
@@ -48,14 +54,21 @@ export default function Game() {
             if (!data["authorized"])
                 navigate("/");
         })
-        stateTimeout.current = setTimeout(fetchState, 1000);
+        stateTimeout.current = setTimeout(fetchState, 10);
+		//timeTimeout.current = setTimeout(timeUpdate, 1000);
 
         return () => {
             if (stateTimeout.current) clearTimeout(stateTimeout.current);
+			// if (timeTimeout.current) clearTimeout(timeTimeout.current);
         }
 
     }, [])
 
+	/*const timeUpdate = () => {
+		console.log(gameState["remainingTurnTime"])
+		setClientTime(clientTime - 1);
+		timeTimeout.current = setTimeout(timeUpdate, 1000);
+	} */
     const handleSpec = () => {
         simpleAction("HERO_POWER");
     }
@@ -78,6 +91,7 @@ export default function Game() {
 			.then(data => {
 				console.log(data);
 				setCanMakeAction(true);
+				fetchState();
 			})
 		}
     }
@@ -95,6 +109,7 @@ export default function Game() {
 			.then(data => {
 				console.log(data);
 				setCanMakeAction(true);
+				fetchState();
 			})
 		}
     }
@@ -119,10 +134,11 @@ export default function Game() {
 			.then(data => {
 				console.log(data);
 				setCanMakeAction(true);
+				fetchState();
 			})
 		}
 	}
-    return <div className="h-screen w-screen">
+    return <div className="h-screen w-screen bg-[url(/img/map.jpg)] bg-cover bg-no-repeat">
             {gameState ? ( <div className="h-full w-full">
                 {gameOngoing ? (
 				<div className="flex flex-col flex-none h-full w-full">
@@ -131,9 +147,9 @@ export default function Game() {
 						<div className="h-[100%] flex flex-none basis-1/4">
 							<GameValue src={"/img/Hourglass_Recruitment_Drive_detail.png"} className="h-[100%] aspect-square" value={gameState["remainingTurnTime"]}></GameValue>
 						</div>
-						<div className="h-[100%] flex flex-none justify-between basis-2/4 bg-stone-500" onClick={() => handleSelectEnemy(0)}>
+						<div className="h-[100%] flex flex-none justify-between basis-2/4 " onClick={() => handleSelectEnemy(0)}>
 							<GameValue src={"/img/Hitpoints_orb.png"} className="h-[100%] aspect-square" value={gameState["opponent"]["hp"]} maxValue={gameState["opponent"]["maxHp"]}></GameValue>
-							<p>HERO IMAGE HERE</p>
+							<img src={opponent}></img>
 							<GameValue src={"/img/Prayer_orb.png"} className="h-[100%] aspect-square" value={gameState["opponent"]["mp"]} maxValue={gameState["opponent"]["maxMp"]}> </GameValue>
 						</div>
 						<p>{String(gameState["yourTurn"])}</p>
@@ -141,11 +157,11 @@ export default function Game() {
 					
 					<div className="basis-1/4 flex flex-none justify-center gap-2">{gameState["opponent"]["board"].map(card => {
           					 return <Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
-                				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectEnemy} ></Card>})}
+                				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectEnemy} state={card["state"]}  ></Card>})}
 					</div>
 					<div className="basis-1/4 flex flex-none justify-center gap-2">{gameState["board"].map(card => {
           					 return <Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
-                				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectBoard} ></Card>})}
+                				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectBoard} state={card["state"]} ></Card>})}
 					</div>
 					<div className="basis-1/3 flex">
 						<div className="flex-col h-[100%] w-fit">
@@ -160,8 +176,8 @@ export default function Game() {
                 				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handlePlayHand} ></Card>})}
 						</div>
 						<div className="basis-1/20 flex flex-col">
-							<Button text="Special Attack" onClick={handleSpec}></Button>
-							<Button text="End Turn" onClick={handleEndTurn}></Button>
+							<Button text="" onClick={handleSpec} className=" h-[50%] bg-[url(/img/Special_attack_orb.png)] bg-contain bg-no-repeat bg-center"></Button>
+							<Button text="" onClick={handleEndTurn} className=" h-[50%] bg-[url(/img/play.png)] bg-contain bg-no-repeat bg-center"></Button>
 						</div>	
                     </div>
 				</div> ) 

@@ -1,484 +1,146 @@
-import mugger from "../assets/img/Mugger.png"
-import Goblin from "../assets/img/Goblin.png"
-import GnomeChild from "../assets/img/Gnome_child_chathead.png"
-import Spider from "../assets/img/Spider.png"
-import Boar from "../assets/img/Boar.png"
-import AnimatedBronzeArmour from "../assets/img/Animated_Bronze_Armour.png"
-import KingRoald from "../assets/img/King_Roald.png"
-import ImpChampion from "../assets/img/Imp_Champion.png"
-import Bear from "../assets/img/Grizzly_bear.png"
-import BloodSnail from "../assets/img/Blood_Blamish_Snail.png"
-import VarrockGuard from "../assets/img/Guard_Varrock.png"
-import Terrorbird from "../assets/img/Terrorbird.png"
-import PenanceFighter from "../assets/img/Penance_Fighter.png"
-import PenanceRanger from "../assets/img/Penance_Ranger.png"
-import ZalcGolem from "../assets/img/Golem.png"
-import AcidicBloodveld from "../assets/img/Acidic_Bloodveld.png"
-import Ugthanki from "../assets/img/Ugthanki.png"
-import Splatter from "../assets/img/Splatter.png"
-import VarrockChemist from "../assets/img/Apothecary.png"
-import ArdyKnight from "../assets/img/Knight_of_Ardougne.png"
-import TzKih from "../assets/img/Tz-Kih.png"
-import Minotaur from "../assets/img/Minotaur.png"
-import Catablepon from "../assets/img/Catablepon.png"
-import Nechryael from "../assets/img/Nechryael.png"
-import Necromancer from "../assets/img/Necromancer.png"
-import Dharok from "../assets/img/Dharok_the_Wretched.png"
-import Brawler from "../assets/img/Brawler.png"
-import Hellhound from "../assets/img/Hellhound.png"
-import BrassicanMage from "../assets/img/Brassican_Mage.png"
-import Glough from "../assets/img/Glough.png"
-import Dawn from "../assets/img/Dawn.png"
-import TheEverlasting from "../assets/img/The_Everlasting.png"
-import Jad from "../assets/img/TzTok-Jad.png"
-import BarrelBomb from "../assets/img/Barrel_bomb.png"
 export default function cardData(id=0) {
     let intid = parseInt(id)
     let cardData = [];
     //default values
     cardData["name"] = "Knight of Ardougne";
-    cardData["image"] = ArdyKnight;
+    cardData["image"] = "/img/Goblin.png"
 
     switch(intid) {
         case 0:
             cardData["name"] = "Goblin";
-            cardData["image"] = Goblin;
+            cardData["image"] = "/img/Goblin.png";
             break;
         case 1:
-            cardData["name"] = "GnomeChild";
-            cardData["image"] = GnomeChild;
+            cardData["name"] = "Gnome Child";
+            cardData["image"] = "/img/Gnome_child_chathead.png";
             break;
         case 2:
             cardData["name"] = "Spider";
-            cardData["image"] = Spider;
+            cardData["image"] = "/img/Spider.png";
             break;
         case 3:
             cardData["name"] = "Boar";
-            cardData["image"] = Boar;
+            cardData["image"] = "/img/Boar.png";
             break;
         case 4:
-            cardData["name"] = "Animated Bronze Armour";
-            cardData["image"] = AnimatedBronzeArmour;
+            cardData["name"] = "Animated Armor";
+            cardData["image"] = "/img/Animated_Bronze_Armour.png";
             break;
         case 5:
             cardData["name"] = "King Roald";
-            cardData["image"] = KingRoald;
+            cardData["image"] = "/img/King_Roald.png";
             break;
         case 6:
-            cardData["name"] = "ImpChampion";
-            cardData["image"] = ImpChampion;
+            cardData["name"] = "Imp Champion";
+            cardData["image"] = "/img/Imp_Champion.png";
             break;
         case 7:
             cardData["name"] = "Bear";
-            cardData["image"] = Bear;
+            cardData["image"] = "/img/Grizzly_bear.png";
             break;
         case 8:
             cardData["name"] = "BloodSnail";
-            cardData["image"] = BloodSnail;
+            cardData["image"] = "/img/Blood_Blamish_Snail.png";
             break;
         case 9:
             cardData["name"] = "VarrockGuard";
-            cardData["image"] = VarrockGuard;
+            cardData["image"] = "/img/Guard_Varrock.png"
             break;
         case 10:
             cardData["name"] = "Terrorbird";
-            cardData["image"] = Terrorbird;
+            cardData["image"] = "/img/Terrorbird.png";;
             break;
         case 11:
             cardData["name"] = "PenanceFighter";
-            cardData["image"] = PenanceFighter;
+            cardData["image"] = "/img/Penance_Fighter.png";;
             break;
         case 12:
             cardData["name"] = "PenanceRanger";
-            cardData["image"] = PenanceRanger;
+            cardData["image"] = "/img/Penance_Ranger.png";;
             break;
         case 13:
             cardData["name"] = "ZalcGolem";
-            cardData["image"] = ZalcGolem;
+            cardData["image"] = "/img/Golem.png";;
             break;
         case 14:
             cardData["name"] = "AcidicBloodveld";
-            cardData["image"] = AcidicBloodveld;
+            cardData["image"] = "/img/Acidic_Bloodveld.png";;
             break;
         case 15:
             cardData["name"] = "Ugthanki";
-            cardData["image"] = Ugthanki;
+            cardData["image"] = "/img/Ugthanki.png";;
             break;
         case 16:
             cardData["name"] = "Splatter";
-            cardData["image"] = Splatter;
+            cardData["image"] = "/img/Splatter.png";;
             break;
         case 17:
             cardData["name"] = "Ingald Belger";
-            cardData["image"] = VarrockChemist;
+            cardData["image"] = "/img/Apothecary.png";;
             break;
         case 18:
             cardData["name"] = "Knight of Ardougne";
-            cardData["image"] = ArdyKnight;
+            cardData["image"] = "/img/Knight_of_Ardougne.png";;
             break;
         case 19:
             cardData["name"] = "Tz-Kih";
-            cardData["image"] = TzKih;
+            cardData["image"] = "/img/Tz-Kih.png";;
             break;
         case 20:
             cardData["name"] = "Minotaur";
-            cardData["image"] = Minotaur;
+            cardData["image"] = "/img/Minotaur.png";;
             break;
         case 21:
             cardData["name"] = "Catablepon";
-            cardData["image"] = Catablepon;
+            cardData["image"] = "/img/Catablepon.png";;
             break;
         case 22:
             cardData["name"] = "Nechryael";
-            cardData["image"] = Nechryael;
+            cardData["image"] = "/img/Nechryael.png";;
             break;
         case 23:
             cardData["name"] = "Necromancer";
-            cardData["image"] = Necromancer;
+            cardData["image"] = "/img/Necromancer.png";;
             break;
         case 24:
             cardData["name"] = "Dharok the Wretched";
-            cardData["image"] = Dharok;
+            cardData["image"] = "/img/Dharok_the_Wretched.png";;
             break;
         case 25:
             cardData["name"] = "Brawler";
-            cardData["image"] = Brawler;
+            cardData["image"] = "/img/Brawler.png";;
             break;
         case 26:
             cardData["name"] = "Hellhound";
-            cardData["image"] = Hellhound;
+            cardData["image"] = "/img/Hellhound.png";;
             break;
         case 27:
             cardData["name"] = "Brassican Mage";
-            cardData["image"] = BrassicanMage;
+            cardData["image"] = "/img/Brassican_Mage.png";;
             break;
         case 28:
             cardData["name"] = "Glough";
-            cardData["image"] = Glough;
+            cardData["image"] = "/img/Glough.png";;
             break;
         case 29:
             cardData["name"] = "Dawn";
-            cardData["image"] = Dawn;
+            cardData["image"] = "/img/Dawn.png";;
             break;
         case 30:
             cardData["name"] = "The Everlasting";
-            cardData["image"] = TheEverlasting;
+            cardData["image"] = "/img/The_Everlasting.png";;
             break;
         case 31:
             cardData["name"] = "Jad";
-            cardData["image"] = Jad;
+            cardData["image"] = "/img/TzTok-Jad.png";;
             break;
         case 32:
             cardData["name"] = "Barrel Bomb";
-            cardData["image"] = BarrelBomb;
-            break;
-        case 33:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 34:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 35:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 36:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 37:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 38:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 39:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 40:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 41:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 42:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 43:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 44:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 45:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 46:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 47:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 48:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 49:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 50:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 51:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 52:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 53:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 54:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 55:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 56:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 57:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 58:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 59:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 60:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 61:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 62:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 63:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 64:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 65:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 66:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 67:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 68:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 69:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 70:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 71:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 72:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 73:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 74:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 75:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 76:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 77:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 78:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 79:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 80:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 81:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 82:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 83:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 84:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 85:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 86:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 87:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 88:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 89:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 90:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 91:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 92:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 93:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 94:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 95:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 96:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 97:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 98:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 99:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 100:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 101:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 102:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 103:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 104:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 105:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 106:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 107:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
-            break;
-        case 108:
-            cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
+            cardData["image"] = "/img/Barrel_bomb.png";;
             break;
         default :
             cardData["name"] = "Mugger";
-            cardData["image"] = mugger;
+            cardData["image"] = "/img/Mugger.png";
             break;
     }
     return cardData;

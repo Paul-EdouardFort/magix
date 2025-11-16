@@ -1,8 +1,14 @@
 import cardData from "../data/cardData"
 import inventory from "../assets/img/Inventory_tab.png"
-export default function Card({id=0,cost=0,hp=0,atk=0,mechanics=[],uid=0,baseHP,onClick}) {
+export default function Card({id=0,cost=0,hp=0,atk=0,mechanics=[],uid=0,baseHP,onClick, className="",state="SLEEP"}) {
     let card_data = cardData(id);
-    return <div onClick={() => onClick(uid)} className="w-[18.54vh] h-[25vh] bg-[url(../assets/img/Inventory_tab.png)] bg-cover bg-no-repeat text-yellow-300 flex flex-none flex-col text-center items-center outline-offset-[-2px] p-2"  >
+    let atkColor = " text-white "
+    console.log(state)
+    if (state == "IDLE")
+        atkColor = " text-red-500 "
+    return <div onClick={() => {
+            onClick(uid);
+        }} className={"w-[18.54vh] h-[25vh] bg-[url(../assets/img/Inventory_tab.png)] bg-cover bg-no-repeat text-yellow-300 flex flex-none flex-col text-center items-center outline-offset-[-2px] p-2" + className}  >
         <div className="h-[15%] flex-none text-center flex align-center">
             <p className="text-[100%]/0 self-center">{card_data["name"]}</p>
         </div>
@@ -30,7 +36,7 @@ export default function Card({id=0,cost=0,hp=0,atk=0,mechanics=[],uid=0,baseHP,o
                 <div className="h-[10%]"></div>
                 <div className="h-[20%] w-full bg-stone-500 flex border border-black ">
                     <img src="/img/Attack_icon_detail.png" alt="" className="aspect-square h-[100%]"/>
-                    <p className="text-white text-center basis-1/2 text-[1.5vh]/0 drop-shadow-xs self-center" >{atk}</p>  
+                    <p className={"text-center basis-1/2 text-[1.5vh]/0 drop-shadow-xs self-center " + atkColor} >{atk}</p>  
                 </div>
             </div>
         </div>
