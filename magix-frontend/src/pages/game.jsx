@@ -81,23 +81,6 @@ export default function Game() {
 			})
 		}
     }
-    /*const renderCards = (result) => {
-        let cards = {};
-        cards["hand"] = []; cards["board"] = []; cards["opponent"] = [];
-        result["hand"].forEach(card => {
-            cards["hand"].push(<Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
-                uid={card["uid"]} baseHp={card["baseHp"]} onClick={handlePlayHand} ></Card>)
-        });
-		result["board"].forEach(card => {
-			cards["board"].push(<Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
-                uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectBoard} ></Card>)
-		});
-		result["opponent"]["board"].forEach(card => {
-			cards["opponent"].push(<Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
-                uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectEnemy} ></Card>)
-		});
-         setCards(cards);
-    }*/
     const handlePlayHand = (uid) => {
 		if(canMakeAction){
 			setCanMakeAction(false);
@@ -143,11 +126,17 @@ export default function Game() {
             {gameState ? ( <div className="h-full w-full">
                 {gameOngoing ? (
 				<div className="flex flex-col flex-none h-full w-full">
-					<p>{String(gameState["yourTurn"])}</p>
-					<div className="basis-2/12 flex-none">
-						<GameValue src={"/img/Hourglass_(Recruitment_Drive)_detail.png"} className="w-24 h-24" value={gameState["remainingTurnTime"]}></GameValue>
-						<GameValue src={"/img/Hitpoints_orb.png"} className="w-24 h-24" value={gameState["opponent"]["hp"]} maxValue={gameState["opponent"]["maxHp"]}></GameValue>
-						<GameValue src={"/img/Prayer_orb.png"} className="w-24 h-24" value={gameState["opponent"]["mp"]} maxValue={gameState["opponent"]["maxMp"]}> </GameValue>
+					
+					<div className="basis-2/12 flex-none flex overflow-hidden">
+						<div className="h-[100%] flex flex-none basis-1/4">
+							<GameValue src={"/img/Hourglass_Recruitment_Drive_detail.png"} className="h-[100%] aspect-square" value={gameState["remainingTurnTime"]}></GameValue>
+						</div>
+						<div className="h-[100%] flex flex-none justify-between basis-2/4 bg-stone-500" onClick={() => handleSelectEnemy(0)}>
+							<GameValue src={"/img/Hitpoints_orb.png"} className="h-[100%] aspect-square" value={gameState["opponent"]["hp"]} maxValue={gameState["opponent"]["maxHp"]}></GameValue>
+							<p>HERO IMAGE HERE</p>
+							<GameValue src={"/img/Prayer_orb.png"} className="h-[100%] aspect-square" value={gameState["opponent"]["mp"]} maxValue={gameState["opponent"]["maxMp"]}> </GameValue>
+						</div>
+						<p>{String(gameState["yourTurn"])}</p>
 					</div>
 					
 					<div className="basis-1/4 flex flex-none justify-center gap-2">{gameState["opponent"]["board"].map(card => {
@@ -158,13 +147,15 @@ export default function Game() {
           					 return <Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
                 				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectBoard} ></Card>})}
 					</div>
-					<div className="basis-1/3 flex flex-none">
-						<div className="basis-1/5 flex-col">
-							<GameValue src={"/img/Hitpoints_orb.png"} className="w-24 h-24" value={gameState["hp"]} maxValue={gameState["maxHp"]}></GameValue>
-							<GameValue src={"/img/Prayer_orb.png"} className="w-24 h-24" value={gameState["mp"]} maxValue={gameState["maxMp"]}> </GameValue>
-							<GameValue src={"/img/Teleport_card.png"} className="w-24 h-30" value={gameState["remainingCardsCount"]}></GameValue>
+					<div className="basis-1/3 flex">
+						<div className="flex-col h-[100%] w-fit">
+							<GameValue src={"/img/Hitpoints_orb.png"} className="h-[50%] aspect-square" value={gameState["hp"]} maxValue={gameState["maxHp"]}></GameValue>
+							<GameValue src={"/img/Prayer_orb.png"} className="h-[50%] aspect-square" value={gameState["mp"]} maxValue={gameState["maxMp"]}> </GameValue>
 						</div>
-						<div className="basis-15/20 flex gap-2">{gameState["hand"].map(card => {
+						<div className="h-[100%]">
+							<GameValue src={"/img/back.png"} className="h-[100%] aspect-204/275" value={gameState["remainingCardsCount"]}></GameValue>
+						</div>
+						<div className="basis-15/20 flex justify-center items-center grow gap-2 overflow-x-auto">{gameState["hand"].map(card => {
           					 return <Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
                 				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handlePlayHand} ></Card>})}
 						</div>
