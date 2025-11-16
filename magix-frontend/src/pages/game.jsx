@@ -14,6 +14,7 @@ export default function Game() {
 	const [canMakeAction, setCanMakeAction] = useState(true);
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [opponent, setOpponent] = useState(null);
+	const [info, setInfo] = useState(null);
 	//const [clientTime , setClientTime] = useState(null)
 	//const timeTimeout = useRef(null);
     const navigate = useNavigate();

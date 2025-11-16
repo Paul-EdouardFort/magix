@@ -311,7 +311,7 @@ export default function cardData(id=0) {
             cardData["image"] = "/img/Vardorvis.png";;
             break;
         case 77:
-            cardData["name"] = "Brother Tranquility";
+            cardData["name"] = "Tranquility";
             cardData["image"] = "/img/Brother_Tranquility.png";;
             break;
         default :

@@ -2,6 +2,7 @@ import {useEffect,useState,useRef} from "react";
 import { useNavigate } from "react-router";
 export default function Index() {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   useEffect(()=> {
     
   }, []); 
@@ -23,22 +24,25 @@ export default function Index() {
       console.log(data);
       if (!data["error"])
         navigate("/lobby");
+      else setError("Invalid username or password")
     })
 
   }
-  return <div>
-            <h1>Accueil</h1>
-            <p>Hello!</p>
-            <form onSubmit={handleSubmit}>
+  return <div className=" h-screen w-screen bg-contain bg-black bg-no-repeat bg-center bg-[url(/img/Login_background.png)] flex justify-center items-center">
+            <form className="bg-stone-500 border border-black h-[30%] w-[30%] text-yellow-300 flex flex-col justify-between items-center py-[1%] " onSubmit={handleSubmit}>
               <label>
-                Username:
-                <input type="text" value={loginForm.username} onChange={(e) => {setLoginForm ({...loginForm,username : e.target.value})}}/>
+                Username :&nbsp;
+                <input className="px-[5px]" type="text" value={loginForm.username} onChange={(e) => {setLoginForm ({...loginForm,username : e.target.value})}}/>
               </label>
+             
               <label>
-                Password:
-                <input type="password" value={loginForm.password} onChange={(e) => {setLoginForm ({...loginForm,password : e.target.value})}} />
+                Password :&nbsp;   
+                <input className="px-[5px]" type="password" value={loginForm.password} onChange={(e) => {setLoginForm ({...loginForm,password : e.target.value})}} />
               </label>
-              <button type="submit">Login</button>
+               {error ? (<div>
+                  <p className="text-red-500 text-40 bg-white p-[10px]">{error}</p>
+              </div> ): (<div className="absolute w-0 h-0"></div>)}
+              <button className="border border-black bg-stone-700 p-[10px]" type="submit">Login</button>
             </form>
           </div> 
 }
