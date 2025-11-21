@@ -144,7 +144,7 @@ export default function Game() {
                 {gameOngoing ? (
 				<div className="flex flex-col flex-none h-full w-full">
 					
-					<div className="basis-2/12 flex-none flex overflow-hidden">
+					<div className="basis-2/12 flex-none flex justify-between items-center overflow-hidden">
 						<div className="h-[100%] flex flex-none basis-1/4">
 							<GameValue src={"/img/Hourglass_Recruitment_Drive_detail.png"} className="h-[100%] aspect-square" value={gameState["remainingTurnTime"]}></GameValue>
 						</div>
@@ -153,16 +153,18 @@ export default function Game() {
 							<img src={opponent}></img>
 							<GameValue src={"/img/Prayer_orb.png"} className="h-[100%] aspect-square" value={gameState["opponent"]["mp"]} maxValue={gameState["opponent"]["maxMp"]}> </GameValue>
 						</div>
-						<p>{String(gameState["yourTurn"])}</p>
+						<div className="h-[100%] flex-none basis-1/4 flex justify-end items-center ">
+							<p className="bg-stone-500 self-center p-[5vh]">{String(gameState["yourTurn"])}</p>
+						</div>
 					</div>
 					
 					<div className="basis-1/4 flex flex-none justify-center gap-2">{gameState["opponent"]["board"].map(card => {
           					 return <Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
-                				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectEnemy} state={card["state"]}  ></Card>})}
+                				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectEnemy} state={card["state"]} turn={!gameState["yourTurn"]}  ></Card>})}
 					</div>
 					<div className="basis-1/4 flex flex-none justify-center gap-2">{gameState["board"].map(card => {
           					 return <Card id={card["id"]} cost={card["cost"]} hp={card["hp"]} atk={card["atk"]} mechanics={card["mechanics"]} 
-                				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectBoard} state={card["state"]} ></Card>})}
+                				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handleSelectBoard} state={card["state"]} isSelected={card["uid"] == selectedCard} turn={gameState["yourTurn"]} ></Card>})}
 					</div>
 					<div className="basis-1/3 flex">
 						<div className="flex-col h-[100%] w-fit">

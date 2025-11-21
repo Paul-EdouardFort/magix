@@ -32,12 +32,12 @@ export default function Index() {
             <form className="bg-stone-500 border border-black h-[30%] w-[30%] text-yellow-300 flex flex-col justify-between items-center py-[1%] " onSubmit={handleSubmit}>
               <label>
                 Username :&nbsp;
-                <input className="px-[5px]" type="text" value={loginForm.username} onChange={(e) => {setLoginForm ({...loginForm,username : e.target.value})}}/>
+                <input className="px-[5px] bg-stone-700" type="text" value={loginForm.username} onChange={(e) => {setLoginForm ({...loginForm,username : e.target.value})}}/>
               </label>
              
               <label>
                 Password :&nbsp;   
-                <input className="px-[5px]" type="password" value={loginForm.password} onChange={(e) => {setLoginForm ({...loginForm,password : e.target.value})}} />
+                <input className="px-[5px] bg-stone-700" type="password" value={loginForm.password} onChange={(e) => {setLoginForm ({...loginForm,password : e.target.value})}} />
               </label>
                {error ? (<div>
                   <p className="text-red-500 text-40 bg-white p-[10px]">{error}</p>

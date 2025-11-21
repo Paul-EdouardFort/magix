@@ -20,9 +20,17 @@ Internationalisation
 i18n - languages
 l10n - localisation (français france vs français canada)
 
+SEO 
+search engine optimization
+utiliser h1 et gras, plus de valeurs pour le SE
+pas trop de fois la même chose
+3-5 mots clés max
+réputation : liens vers le site
+sujet en rapport avec le texte : cloaking NE PAS FAIRE
+
+digital ocean :
+droplets = machines virtuelles
+
 
 Questions
-- GameState bug
-- Import images
-- Proper React code
-- background images
+- dri

@@ -152,7 +152,7 @@ export default function cardData(id=0) {
             break;
         case 37:
             cardData["name"] = "Evil Chicken";
-            cardData["image"] = "/img/Evil_chicken.png";;
+            cardData["image"] = "/img/Evil_Chicken.png";;
             break;
         case 38:
             cardData["name"] = "Normal Rabbit";
