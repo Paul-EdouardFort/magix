@@ -347,8 +347,10 @@ export default function cardData(id=0) {
             cardData["image"] = "/img/KGP_Agent.png";
             break;
         case 85:
-            cardData["name"] = "Cabin Boy Jenkins";
-            cardData["image"] = "/img/Cabin_Boy_Jenkins.png"; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            cardData["name"] = "Ghost Boy Jenkins";
+            cardData["image"] = "/img/Cabin_Boy_Jenkins.png"; 
+            cardData["stealth_name"] = "Cabin Boy Jenkins";
+            cardData["stealth_image"] = "/img/Cabin_Boy_Jenkins_chathead.png";
             break;
         case 86:
             cardData["name"] = "Gemstone Crab";
