@@ -5,6 +5,7 @@ export default function Lobby() {
     const [chatSrc, setChatSrc] = useState(null);
     const [deckSrc, setDeckSrc] = useState(null);
     const [key, setKey] = useState(null);
+    const [username,setUsername] = useState(null);
     useEffect(() => {
         fetch("/api/lobby.php", {
         })
@@ -16,7 +17,7 @@ export default function Lobby() {
             setChatSrc('https://magix.apps-de-cours.com/server/chat/' + data["key"]);
             setDeckSrc('https://magix.apps-de-cours.com/server/deck/' + data["key"]);
             console.log(data);
-            
+            setUsername(localStorage.getItem("username"));
         })
     }, [])
     const navigate = useNavigate();
@@ -55,6 +56,7 @@ export default function Lobby() {
         
     }
     return <div>
+            Bonjour {username}!
             <Button text="Pratique" onClick={handlePratique}></Button>
             <Button text="Jouer" onClick={handleJouer}></Button>
             <Button text="Quitter" onClick={handleQuitter}></Button>

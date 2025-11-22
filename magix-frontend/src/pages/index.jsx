@@ -2,9 +2,15 @@ import {useEffect,useState,useRef} from "react";
 import { useNavigate } from "react-router";
 export default function Index() {
   const navigate = useNavigate();
+  const [userName,setUserName] = useState(null);
   const [error, setError] = useState(null);
-  useEffect(()=> {
-    
+ 
+  useEffect(()=> {o
+     let savedUsername = localStorage.getItem("username");
+      if (savedUsername) {
+        setUserName(savedUsername);
+      }
+      console.log(userName)
   }, []); 
   const [loginForm,setLoginForm] = useState({
     username : "",
@@ -21,9 +27,10 @@ export default function Index() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      if (!data["error"])
+      if (!data["error"]){
+        localStorage.setItem("username",loginForm.username);
         navigate("/lobby");
+      }
       else setError("Invalid username or password")
     })
 

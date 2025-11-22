@@ -156,6 +156,7 @@ export default function Game() {
 							<GameValue src={"/img/Prayer_orb.png"} className="h-[100%] aspect-square" value={gameState["opponent"]["mp"]} maxValue={gameState["opponent"]["maxMp"]}> </GameValue>
 						</div>
 						<div className="h-[100%] flex-none basis-1/4 flex justify-end items-center ">
+							<GameValue src={"/img/back.png"} className="h-[100%] aspect-204/275" value={gameState["opponent"]["remainingCardsCount"]}></GameValue>
 							<Indicator value={gameState["yourTurn"]} trueText="Your turn!" falseText="Enemy's turn" className=" bg-stone-500 self-center p-[5vh]"> </Indicator>
 						</div>
 					</div>
