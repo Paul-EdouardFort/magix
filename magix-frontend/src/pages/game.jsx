@@ -4,6 +4,7 @@ import heroData from "../data/heroData"
 import GameValue from "../components/gamevalue";
 import Button from "../components/button";
 import Card from "../components/card";
+import Indicator from "../components/indicator";
 import gnomeChild from '/img/Gnome_child_chathead.png';
 //import hpOrb from '../assets/img/Hitpoints_orb.png';
 //import prayerOrb from '../assets/img/Prayer_orb.png';
@@ -133,6 +134,7 @@ export default function Game() {
 			})
 			.then(response => response.json())
 			.then(data => {
+				setSelectedCard(null);
 				console.log(data);
 				setCanMakeAction(true);
 				fetchState();
@@ -154,7 +156,7 @@ export default function Game() {
 							<GameValue src={"/img/Prayer_orb.png"} className="h-[100%] aspect-square" value={gameState["opponent"]["mp"]} maxValue={gameState["opponent"]["maxMp"]}> </GameValue>
 						</div>
 						<div className="h-[100%] flex-none basis-1/4 flex justify-end items-center ">
-							<p className="bg-stone-500 self-center p-[5vh]">{String(gameState["yourTurn"])}</p>
+							<Indicator value={gameState["yourTurn"]} trueText="Your turn!" falseText="Enemy's turn" className=" bg-stone-500 self-center p-[5vh]"> </Indicator>
 						</div>
 					</div>
 					
@@ -179,8 +181,10 @@ export default function Game() {
                 				uid={card["uid"]} baseHp={card["baseHp"]} onClick={handlePlayHand} ></Card>})}
 						</div>
 						<div className="basis-1/20 flex flex-col">
+							
 							<Button text="" onClick={handleSpec} className=" h-[50%] bg-[url(/img/Special_attack_orb.png)] bg-contain bg-no-repeat bg-center"></Button>
-							<Button text="" onClick={handleEndTurn} className=" h-[50%] bg-[url(/img/play.png)] bg-contain bg-no-repeat bg-center"></Button>
+							<Indicator value={!gameState["heroPowerAlreadyUsed"]} trueText="Spec Ready!" falseText="Regenerating..." className=" h-[10%]"></Indicator>
+							<Button text="" onClick={handleEndTurn} className=" h-[40%] bg-[url(/img/play.png)] bg-contain bg-no-repeat bg-center"></Button>
 						</div>	
                     </div>
 				</div> ) 

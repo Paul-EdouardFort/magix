@@ -7,8 +7,8 @@ export default function cardData(id=0) {
 
     switch(intid) {
         case 1:
-            cardData["name"] = "Goblin";
-            cardData["image"] = "/img/Goblin.png";
+            cardData["name"] = "Rat";
+            cardData["image"] = "/img/Rat.png";
             break;
         case 2:
             cardData["name"] = "Gnome Child";
@@ -313,6 +313,134 @@ export default function cardData(id=0) {
         case 77:
             cardData["name"] = "Tranquility";
             cardData["image"] = "/img/Brother_Tranquility.png";;
+            break;
+        case 78:
+            cardData["name"] = "Dark Kebbit";
+            cardData["image"] = "/img/Dark_kebbit.png";;
+            break;
+        case 79:
+            cardData["name"] = "Wilough";
+            cardData["image"] = "/img/Wilough.png";;
+            break;
+        case 80:
+            cardData["name"] = "Evil Bob";
+            cardData["image"] = "/img/Evil_Bob.png";;
+            break;
+        case 81:
+            cardData["name"] = "The Thing";
+            cardData["image"] = "/img/Sheep_(penguins).png.png";
+            break;
+        case 82:
+            cardData["name"] = "Evil Creature";
+            cardData["image"] = "/img/Evil_Creature.png";;
+            break;
+        case 83:
+            cardData["name"] = "Sand Crab";
+            cardData["image"] = "/img/Sand_Crab.png";;
+            break;
+        case 84:
+            cardData["name"] = "KGP Agent";
+            cardData["image"] = "/img/KGP_Agent.png";;
+            break;
+        case 85:
+            cardData["name"] = "Cabin Boy Jenkins";
+            cardData["image"] = "/img/Cabin_Boy_Jenkins.png";;
+            break;
+        case 86:
+            cardData["name"] = "Gemstone Crab";
+            cardData["image"] = "/img/Gemstone_Crab.png";;
+            break;
+        case 87:
+            cardData["name"] = "Wall Beast";
+            cardData["image"] = "/img/Wall_Beast.png";;
+            break;
+        case 88:
+            cardData["name"] = "Rock Crab";
+            cardData["image"] = "/img/Rock_Crab.png";;
+            break;
+        case 89:
+            cardData["name"] = "Ammonite Crab";
+            cardData["image"] = "/img/Ammonite Crab.png";;
+            break;
+        case 90:
+            cardData["name"] = "Flawed Golem";
+            cardData["image"] = "/img/FLawed_Golem.png";;
+            break;
+        case 91:
+            cardData["name"] = "Goblin";
+            cardData["image"] = "/img/Goblin.png";;
+            break;
+        case 92:
+            cardData["name"] = "Sliske";
+            cardData["image"] = "/img/Sliske.png";;
+            break;
+        case 93:
+            cardData["name"] = "Abyssal Sire";
+            cardData["image"] = "/img/Abyssal_Sire.png";;
+            break;
+        case 94:
+            cardData["name"] = "Nylocas";
+            cardData["image"] = "/img/Nylocas.png";;
+            break;
+        case 95:
+            cardData["name"] = "Gryphon";
+            cardData["image"] = "/img/Gryphon.png";;
+            break;
+        case 96:
+            cardData["name"] = "Duke Sucellus";
+            cardData["image"] = "/img/Duke_Sucellus.png";;
+            break;
+        case 97:
+            cardData["name"] = "Melzar the Mad";
+            cardData["image"] = "/img/Melzar_the_Mad.png";;
+            break;
+        case 98:
+            cardData["name"] = "Chaos Fanatic";
+            cardData["image"] = "/img/Chaos_Fanatic.png";;
+            break;
+        case 99:
+            cardData["name"] = "Chaos Elemental";
+            cardData["image"] = "/img/Chaos_Elemental.png";;
+            break;
+        case 100:
+            cardData["name"] = "Crazy Archaeologist";
+            cardData["image"] = "/img/Crazy_archaeologist.png";;
+            break;
+        case 101:
+            cardData["name"] = "Safalaan";
+            cardData["image"] = "/img/Safalaan_Hallow.png";;
+            break;
+        case 102:
+            cardData["name"] = "General Khazard";
+            cardData["image"] = "/img/General_Khazard.png";;
+            break;
+        case 103:
+            cardData["name"] = "Penance Healer";
+            cardData["image"] = "/img/Penance_Healer.png";;
+            break;
+        case 104:
+            cardData["name"] = "Balance Elemental";
+            cardData["image"] = "/img/Balance_Elemental.png";;
+            break;
+        case 105:
+            cardData["name"] = "Araxxor";
+            cardData["image"] = "/img/Araxxor.png";;
+            break;
+        case 106:
+            cardData["name"] = "Ivan Strom";
+            cardData["image"] = "/img/Ivan Strom.png";;
+            break;
+        case 107:
+            cardData["name"] = "Parasite";
+            cardData["image"] = "/img/Parasite.png";;
+            break;
+        case 108:
+            cardData["name"] = "Me";
+            cardData["image"] = "/img/Me.png";;
+            break;
+        case 109:
+            cardData["name"] = "Lord Drakan";
+            cardData["image"] = "/img/Lowerniel_Drakan.png";;
             break;
         default :
             cardData["name"] = "Mugger";
