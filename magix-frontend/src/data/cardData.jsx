@@ -328,7 +328,7 @@ export default function cardData(id=0) {
             break;
         case 81:
             cardData["name"] = "The Thing";
-            cardData["image"] = "/img/Sheep_(penguins).png.png";
+            cardData["image"] = "/img/Sheep_(penguins).png";
             break;
         case 82:
             cardData["name"] = "Evil Creature";
@@ -340,7 +340,7 @@ export default function cardData(id=0) {
             cardData["name"] = "Sand Crab";
             cardData["image"] = "/img/Sand_Crab.png";
             cardData["stealth_name"] = "Sand";
-            cardData["stealth_image"] = "/img/Sandy_Rocks.png";
+            cardData["stealth_image"] = "/img/Sandy_rocks.png";
             break;
         case 84:
             cardData["name"] = "KGP Agent";

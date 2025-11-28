@@ -5,7 +5,7 @@ export default function Index() {
   const [userName,setUserName] = useState(null);
   const [error, setError] = useState(null);
  
-  useEffect(()=> {o
+  useEffect(()=> {
      let savedUsername = localStorage.getItem("username");
       if (savedUsername) {
         setUserName(savedUsername);

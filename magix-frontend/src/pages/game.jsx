@@ -28,24 +28,32 @@ export default function Game() {
 		//console.log(response) // <-- État du jeu, ou message comme : LAST_GAME_WON
 		if (stateTimeout.current) clearTimeout(stateTimeout.current);
 		stateTimeout.current = setTimeout(fetchState, 2000);
-        setGameState(response["result"])
-        if (response["result"] == "WAITING" ){
-            setGameOngoing(null)
-        }
-        else if(response["result"] == "LAST_GAME_WON"){
-            setGameOngoing(null)
-        }
-        else if(response["result"] == "LAST_GAME_LOST"){
-            setGameOngoing(null)
-        }
-        else{ 
-            // setClientTime(response["result"]["remainingTurnTime"]);
-			console.log(response)
-			setOpponent(heroData(response["result"]["opponent"]["heroClass"]));
-             if (!gameOngoing)
-                setGameOngoing(true)
-        }
+       updateGame(response);
 	});
+}
+const updateGame = (response) => {
+	
+	if (typeof response["result"] !== "object") {
+		if (response["result"] == "WAITING" ){
+			setGameOngoing(null)
+		}
+		else if(response["result"] == "LAST_GAME_WON"){
+			setGameOngoing(null)
+		}
+		else if(response["result"] == "LAST_GAME_LOST"){
+			setGameOngoing(null)
+		}
+	}
+	else {
+		setGameState(response["result"])
+		console.log(response);
+		setOpponent(heroData(response["result"]["opponent"]["heroClass"]));
+			if (!gameOngoing)
+				setGameOngoing(true);
+	}
+
+		
+    
 }
 
     useEffect(() => {
@@ -55,8 +63,12 @@ export default function Game() {
         .then(data => {
             if (!data["authorized"])
                 navigate("/");
+			else {
+				if (!stateTimeout.current) 
+					stateTimeout.current = setTimeout(fetchState, 10);
+			}
         })
-        stateTimeout.current = setTimeout(fetchState, 10);
+        
 		//timeTimeout.current = setTimeout(timeUpdate, 1000);
 
         return () => {
@@ -93,7 +105,7 @@ export default function Game() {
 			.then(data => {
 				console.log(data);
 				setCanMakeAction(true);
-				fetchState();
+				updateGame(data);
 			})
 		}
     }
@@ -111,7 +123,7 @@ export default function Game() {
 			.then(data => {
 				console.log(data);
 				setCanMakeAction(true);
-				fetchState();
+				updateGame(data);
 			})
 		}
     }
@@ -137,7 +149,7 @@ export default function Game() {
 				setSelectedCard(null);
 				console.log(data);
 				setCanMakeAction(true);
-				fetchState();
+				updateGame(data);
 			})
 		}
 	}
@@ -189,7 +201,7 @@ export default function Game() {
 						</div>	
                     </div>
 				</div> ) 
-                : (<div>{gameState}</div>)
+                : (<div>TEST</div>)
 				}
                 </div>
             ) : (
