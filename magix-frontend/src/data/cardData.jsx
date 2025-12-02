@@ -39,11 +39,11 @@ export default function cardData(id=0) {
             cardData["image"] = "/img/Grizzly_bear.png";
             break;
         case 9:
-            cardData["name"] = "BloodSnail";
+            cardData["name"] = "Blood Snail";
             cardData["image"] = "/img/Blood_Blamish_Snail.png";
             break;
         case 10:
-            cardData["name"] = "VarrockGuard";
+            cardData["name"] = "Varrock Guard";
             cardData["image"] = "/img/Guard_Varrock.png"
             break;
         case 11:
@@ -51,19 +51,19 @@ export default function cardData(id=0) {
             cardData["image"] = "/img/Terrorbird.png";
             break;
         case 12:
-            cardData["name"] = "PenanceFighter";
+            cardData["name"] = "Penance Fighter";
             cardData["image"] = "/img/Penance_Fighter.png";
             break;
         case 13:
-            cardData["name"] = "PenanceRanger";
+            cardData["name"] = "Penance Ranger";
             cardData["image"] = "/img/Penance_Ranger.png";
             break;
         case 14:
-            cardData["name"] = "ZalcGolem";
+            cardData["name"] = "Golem";
             cardData["image"] = "/img/Golem.png";
             break;
         case 15:
-            cardData["name"] = "AcidicBloodveld";
+            cardData["name"] = "Acidic Bloodveld";
             cardData["image"] = "/img/Acidic_Bloodveld.png";
             break;
         case 16:
@@ -79,7 +79,7 @@ export default function cardData(id=0) {
             cardData["image"] = "/img/Apothecary.png";
             break;
         case 19:
-            cardData["name"] = "Knight of Ardougne";
+            cardData["name"] = "Knight";
             cardData["image"] = "/img/Knight_of_Ardougne.png";
             break;
         case 20:
@@ -191,6 +191,7 @@ export default function cardData(id=0) {
             cardData["image"] = "/img/Dad.png";
             break;
         case 47:
+
             cardData["name"] = "Sea Slug";
             cardData["image"] = "/img/Sea_Slug.png";
             break;
@@ -360,7 +361,7 @@ export default function cardData(id=0) {
             break;
         case 87:
             cardData["name"] = "Wall Beast";
-            cardData["image"] = "/img/Wall_Beast.png";
+            cardData["image"] = "/img/Wall_beast.png";
             cardData["stealth_name"] = "Hole in the Wall";
             cardData["stealth_image"] = "/img/Hole_in_the_wall.png";
             break;

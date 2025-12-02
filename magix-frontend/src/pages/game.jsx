@@ -16,6 +16,7 @@ export default function Game() {
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [opponent, setOpponent] = useState(null);
 	const [info, setInfo] = useState(null);
+	const [warning, setWarning] = useState(null);
 	//const [clientTime , setClientTime] = useState(null)
 	//const timeTimeout = useRef(null);
     const navigate = useNavigate();
@@ -32,21 +33,29 @@ export default function Game() {
 	});
 }
 const updateGame = (response) => {
-	
+	setWarning(null);
 	if (typeof response["result"] !== "object") {
 		if (response["result"] == "WAITING" ){
-			setGameOngoing(null)
+			setGameOngoing(null);
+			setInfo("EN ATTENTE D'UN ADVERSAIRE....");
 		}
 		else if(response["result"] == "LAST_GAME_WON"){
-			setGameOngoing(null)
+			setGameOngoing(null);
+			setInfo("VOUS AVEZ GAGNÉ!!!!");
 		}
 		else if(response["result"] == "LAST_GAME_LOST"){
-			setGameOngoing(null)
+			setGameOngoing(null);
+			setInfo("VOUS AVEZ PERDU....");
 		}
+		else {
+			if (!gameOngoing)
+				setGameOngoing(true);
+			setWarning(response["result"]);
+		}	
 	}
 	else {
 		setGameState(response["result"])
-		console.log(response);
+		
 		setOpponent(heroData(response["result"]["opponent"]["heroClass"]));
 			if (!gameOngoing)
 				setGameOngoing(true);
@@ -91,6 +100,7 @@ const updateGame = (response) => {
     }
     const handleSurrender = () => {
         simpleAction("SURRENDER");
+		navigate("/lobby")
     }
     const simpleAction = (type) => {
 		if(canMakeAction){
@@ -153,13 +163,22 @@ const updateGame = (response) => {
 			})
 		}
 	}
+	const handleQuit = () => {
+		navigate("/lobby")
+	}
     return <div className="h-screen w-screen bg-[url(/img/map.jpg)] bg-cover bg-no-repeat">
             {gameState ? ( <div className="h-full w-full">
+				{warning ? (<div className="absolute left-0 right-0 mx-auto my-[35vh] w-fit bg-red-900 p-[10vh] border rounded-xl z-45 ">{warning}</div>) : (<div className="absolute"></div>)}
                 {gameOngoing ? (
+					
 				<div className="flex flex-col flex-none h-full w-full">
 					
 					<div className="basis-2/12 flex-none flex justify-between items-center overflow-hidden">
-						<div className="h-[100%] flex flex-none basis-1/4">
+						<div className="flex flex-col w-[5vw] basis-1/16 justify-around h-[100%]">
+							<Button text="Resign" onClick={handleSurrender} className=" h-[50%] w-[100%] bg-stone-700 text-yellow-500 rounded-[5px] border"></Button>
+							<Button text="Chat" onClick={handleSurrender} className=" h-[50%] w-[100%] bg-stone-700 text-yellow-500 rounded-[5px] border"></Button>
+						</div>
+						<div className="h-[100%] flex flex-none basis-3/16">
 							<GameValue src={"/img/Hourglass_Recruitment_Drive_detail.png"} className="h-[100%] aspect-square" value={gameState["remainingTurnTime"]}></GameValue>
 						</div>
 						<div className="h-[100%] flex flex-none justify-between basis-2/4 " onClick={() => handleSelectEnemy(0)}>
@@ -169,7 +188,7 @@ const updateGame = (response) => {
 						</div>
 						<div className="h-[100%] flex-none basis-1/4 flex justify-end items-center ">
 							<GameValue src={"/img/back.png"} className="h-[100%] aspect-204/275" value={gameState["opponent"]["remainingCardsCount"]}></GameValue>
-							<Indicator value={gameState["yourTurn"]} trueText="Your turn!" falseText="Enemy's turn" className=" bg-stone-500 self-center p-[5vh]"> </Indicator>
+							<Indicator value={gameState["yourTurn"]} trueText="YOUR TURN" falseText="ENEMY TURN" className=" bg-stone-900 self-center p-[5vh] rounded-[50px] text-yellow-500 text-[20px] p-[2vh] border border-white"> </Indicator>
 						</div>
 					</div>
 					
@@ -196,16 +215,21 @@ const updateGame = (response) => {
 						<div className="basis-1/20 flex flex-col">
 							
 							<Button text="" onClick={handleSpec} className=" h-[50%] bg-[url(/img/Special_attack_orb.png)] bg-contain bg-no-repeat bg-center"></Button>
-							<Indicator value={!gameState["heroPowerAlreadyUsed"]} trueText="Spec Ready!" falseText="Regenerating..." className=" h-[10%]"></Indicator>
+							<Indicator value={!gameState["heroPowerAlreadyUsed"]} trueText="Ready!" falseText="Regenerating..." className=" h-[10%] overflow-hidden text-center"></Indicator>
 							<Button text="" onClick={handleEndTurn} className=" h-[40%] bg-[url(/img/play.png)] bg-contain bg-no-repeat bg-center"></Button>
-						</div>	
+						</div>
+						
                     </div>
 				</div> ) 
-                : (<div>TEST</div>)
+                : (<div className="flex justify-center items-center h-full"><Button text="Retour" onClick={handleQuit} className=" h-[20%] w-[50%] bg-stone-700 m-[7vh] text-[5vh] text-yellow-500 rounded-[50px]"></Button></div>)
 				}
                 </div>
             ) : (
-                <img src={gnomeChild} className="w-24 h-24"></img>
+				<div className="flex flex-col justify-center items-center text-center w-full h-full">
+					<img src={gnomeChild}></img>
+                	<p className="bg-stone-500 p-[10vh] text-[10vh] font-bold rounded-[50px]">{info}</p>
+					<Button text="Retour" onClick={handleQuit} className=" h-[20%] w-[50%] bg-stone-700 m-[7vh] text-[5vh] text-yellow-500 rounded-[50px]"></Button>
+				</div>
             )}
 			</div>
             
