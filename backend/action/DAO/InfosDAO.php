@@ -1,15 +1,33 @@
 <?php
     require_once("action/DAO/SQLConnection.php");
 
-    class SmartLightDAO {
+    class InfosDAO {
 
-        public static function getLightsStatus() {
+        public static function getNotesStatus() {
             $connection = SQLConnection::getConnection();
 
-           // $statement = $connection->prepare("SELECT * FROM lights");
-           // $statement->execute();
+            $statement = $connection->prepare("SELECT * FROM notes");
+            $statement->execute();
             
-            return $connection; // $statement->fetchAll();
+            return  $statement->fetchAll();
+        }
+        public static function insertNote($sujet,$description) {
+            $connection = SQLConnection::getConnection();
+
+            $statement = $connection->prepare("INSERT INTO notes(sujet,description,date) VALUES (:sujet, :description, CURRENT_DATE)");
+            $statement->bindValue(':sujet', $sujet, PDO::PARAM_STR);
+            $statement->bindValue(':description', $description, PDO::PARAM_STR);
+            
+            
+            return $statement->execute();;
+        }
+        public static function deleteNote($id) {
+            $connection = SQLConnection::getConnection();
+
+            $statement = $connection->prepare("DELETE FROM notes WHERE id = :id");
+            $statement->bindValue(':id', $id, PDO::PARAM_INT);
+
+            return $statement->execute();;
         }
 
     }

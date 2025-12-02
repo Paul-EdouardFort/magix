@@ -1,7 +1,8 @@
 <?php
     require_once("action/CommonAction.php");
+    require_once("action/DAO/InfosDAO.php");
 
-    class GameAction extends CommonAction {
+    class InfosDeleteAction extends CommonAction {
 
         public function __construct() {
             parent::__construct(CommonAction::$VISIBILITY_MEMBER);
@@ -9,9 +10,8 @@
 
         protected function executeAction() {
             $data = [];
-            if(array_key_exists("key",$_SESSION))
-                $key = $_SESSION["key"];
-            else $key = null;
-            return compact("key");
+            $data["id"] = (int)$_POST["id"];
+            $data["result"] = InfosDAO::deleteNote($data["id"]);
+            return compact("data");
         }
     }

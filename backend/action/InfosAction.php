@@ -1,7 +1,8 @@
 <?php
     require_once("action/CommonAction.php");
+    require_once("action/DAO/InfosDAO.php");
 
-    class GameAction extends CommonAction {
+    class InfosAction extends CommonAction {
 
         public function __construct() {
             parent::__construct(CommonAction::$VISIBILITY_MEMBER);
@@ -12,6 +13,8 @@
             if(array_key_exists("key",$_SESSION))
                 $key = $_SESSION["key"];
             else $key = null;
-            return compact("key");
+            $data["key"] = $key;
+            $data["notes"] = InfosDAO::getNotesStatus();
+            return compact("data");
         }
     }

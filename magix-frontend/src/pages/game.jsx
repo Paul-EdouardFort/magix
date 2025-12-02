@@ -17,6 +17,9 @@ export default function Game() {
 	const [opponent, setOpponent] = useState(null);
 	const [info, setInfo] = useState(null);
 	const [warning, setWarning] = useState(null);
+	const [chatBool, setChatBool] = useState(null);
+	const [chatSrc, setChatSrc] = useState(null);
+	const chatRef = useRef(null);
 	//const [clientTime , setClientTime] = useState(null)
 	//const timeTimeout = useRef(null);
     const navigate = useNavigate();
@@ -72,7 +75,8 @@ const updateGame = (response) => {
         .then(data => {
             if (!data["authorized"])
                 navigate("/");
-			else {
+			else { 
+           		setChatSrc('https://magix.apps-de-cours.com/server/chat/' + data["key"]);
 				if (!stateTimeout.current) 
 					stateTimeout.current = setTimeout(fetchState, 10);
 			}
@@ -100,7 +104,6 @@ const updateGame = (response) => {
     }
     const handleSurrender = () => {
         simpleAction("SURRENDER");
-		navigate("/lobby")
     }
     const simpleAction = (type) => {
 		if(canMakeAction){
@@ -116,6 +119,10 @@ const updateGame = (response) => {
 				console.log(data);
 				setCanMakeAction(true);
 				updateGame(data);
+				if(type == "SURRENDER"){
+					if (stateTimeout.current) clearTimeout(stateTimeout.current);
+						navigate("/lobby")
+				}
 			})
 		}
     }
@@ -166,7 +173,38 @@ const updateGame = (response) => {
 	const handleQuit = () => {
 		navigate("/lobby")
 	}
+	const handleChat = () => {
+		if (!chatBool)
+			setChatBool(true);
+		else
+			setChatBool(null);
+	}
+	 const applyStyles = (newHeight = "200px") => {
+        //console.log(newHeight)
+        let styles = {
+            fontColor : "white",
+            backgroundColor : "black",
+            fontGoogleName : "Roboto",
+            fontSize : "20px",
+            hideIcons : true,
+            inputBackgroundColor : "red",
+            inputFontColor : "yellow",
+            height : "350px", //newHeight , //y'a probablement des meilleures façons
+            padding: "",
+            memberListFontColor : "#ff00dd",
+            borderColor : "blue",
+            memberListBackgroundColor : "white",
+            hideScrollBar: "true", // pour cacher le scroll bar
+        }
+        
+        setTimeout(() => {
+            chatRef.current.contentWindow.postMessage(JSON.stringify(styles), "*");	
+    }, 100);
+}
     return <div className="h-screen w-screen bg-[url(/img/map.jpg)] bg-cover bg-no-repeat">
+			{chatBool ? (<div className="absolute w-[25vw] h-[50vh] left-[75vw] top-[20vh] "><iframe width={"100%"} height={"100%"} 
+                src={chatSrc} onLoad={applyStyles} ref={chatRef}  >
+                    </iframe></div>) : (<div className="absolute"></div>)}
             {gameState ? ( <div className="h-full w-full">
 				{warning ? (<div className="absolute left-0 right-0 mx-auto my-[35vh] w-fit bg-red-900 p-[10vh] border rounded-xl z-45 ">{warning}</div>) : (<div className="absolute"></div>)}
                 {gameOngoing ? (
@@ -176,7 +214,7 @@ const updateGame = (response) => {
 					<div className="basis-2/12 flex-none flex justify-between items-center overflow-hidden">
 						<div className="flex flex-col w-[5vw] basis-1/16 justify-around h-[100%]">
 							<Button text="Resign" onClick={handleSurrender} className=" h-[50%] w-[100%] bg-stone-700 text-yellow-500 rounded-[5px] border"></Button>
-							<Button text="Chat" onClick={handleSurrender} className=" h-[50%] w-[100%] bg-stone-700 text-yellow-500 rounded-[5px] border"></Button>
+							<Button text="Chat" onClick={handleChat} className=" h-[50%] w-[100%] bg-stone-700 text-yellow-500 rounded-[5px] border"></Button>
 						</div>
 						<div className="h-[100%] flex flex-none basis-3/16">
 							<GameValue src={"/img/Hourglass_Recruitment_Drive_detail.png"} className="h-[100%] aspect-square" value={gameState["remainingTurnTime"]}></GameValue>

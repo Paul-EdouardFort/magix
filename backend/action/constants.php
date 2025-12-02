@@ -1,7 +1,7 @@
 <?php
     
-    define("DB_HOST", "mysql:host=webmysql.notes-de-cours.com:"); // echo DB_HOST
-    define("DB_NAME", "smarthome");
-    define("DB_USER", "smarthomeuser");
-    define("DB_PASS", "smhFTW!6l");
+    define("DB_HOST", "pgsql:host=webpgsql.notes-de-cours.com"); // echo DB_HOST
+    define("DB_NAME", "db_e2234810");
+    define("DB_USER", "e2234810");
+    define("DB_PASS", "e2234810");
     

@@ -5,6 +5,7 @@ import Index from './pages/index'
 import Lobby from './pages/lobby'
 import Game from './pages/game'
 import Deck from './pages/deck'
+import Infos from './pages/infos';
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="/lobby" element={<Lobby />} />
             <Route path="/game" element={<Game />} />
             <Route path="/deck" element={<Deck />} />
+            <Route path="/infos" element={<Infos />} />
         </Routes>
     </BrowserRouter>
 )

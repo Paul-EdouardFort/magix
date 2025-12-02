@@ -59,6 +59,9 @@ export default function Lobby() {
                 navigate("/");
         })
     }
+    const handleInfos = () => {
+        navigate("/infos")
+    }
 
 
     const applyStyles = (newHeight = "200px") => {
@@ -87,6 +90,7 @@ export default function Lobby() {
 
     }
     return <div className="flex h-screen w-screen bg-black justify-between">
+            <Button text="Infos" onClick={handleInfos} className=" absolute left-[95vw] top-0 h-[10vh] w-[5vw] bg-stone-500"></Button>
             <div className="flex flex-col justify-around items-center w-[25%]">
                 <p className="text-yellow-500">Bonjour {username}!</p>
                 <Button text="Pratique" onClick={handlePratique} className=" h-[20%] w-[75%] bg-stone-500"></Button>
