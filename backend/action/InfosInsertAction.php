@@ -10,7 +10,12 @@
 
         protected function executeAction() {
             $data = [];
-            $data["result"] = InfosDAO::insertNote($_POST["sujet"] , $_POST["description"]);
+            if(array_key_exists("updatingId",$_POST))
+            {
+               $data["result"] = InfosDAO::updateNote($_POST["sujet"] , $_POST["description"], $_POST["updatingId"] );
+            }
+               else
+                $data["result"] = InfosDAO::insertNote($_POST["sujet"] , $_POST["description"]);
             return compact("data");
         }
     }

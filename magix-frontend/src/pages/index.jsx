@@ -37,13 +37,13 @@ export default function Index() {
   }
   return <div className=" h-screen w-screen bg-contain bg-black bg-no-repeat bg-center bg-[url(/img/Login_background.png)] flex justify-center items-center">
             <form className="bg-stone-500 border border-black h-[30%] w-[30%] text-yellow-300 flex flex-col justify-between items-center py-[1%] " onSubmit={handleSubmit}>
-              <label>
-                Username :&nbsp;
+              <label className="flex justify-center items-center gap-5">
+                <p>Username :</p>
                 <input className="px-[5px] bg-stone-700" type="text" value={loginForm.username} onChange={(e) => {setLoginForm ({...loginForm,username : e.target.value})}}/>
               </label>
              
-              <label>
-                Password :&nbsp;   
+              <label className="flex justify-center items-center gap-5">
+                <p>Password :</p>  
                 <input className="px-[5px] bg-stone-700" type="password" value={loginForm.password} onChange={(e) => {setLoginForm ({...loginForm,password : e.target.value})}} />
               </label>
                {error ? (<div>
