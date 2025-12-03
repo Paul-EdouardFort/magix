@@ -11,6 +11,7 @@
             
             return  $statement->fetchAll();
         }
+
         public static function insertNote($sujet,$description) {
             $connection = SQLConnection::getConnection();
 
@@ -18,9 +19,9 @@
             $statement->bindValue(':sujet', $sujet, PDO::PARAM_STR);
             $statement->bindValue(':description', $description, PDO::PARAM_STR);
             
-            
             return $statement->execute();
         }
+
         public static function deleteNote($id) {
             $connection = SQLConnection::getConnection();
 
@@ -29,6 +30,7 @@
 
             return $statement->execute();
         }
+
         public static function updateNote( $sujet, $description,$id) {
             $connection = SQLConnection::getConnection();
 
@@ -39,5 +41,4 @@
             
             return $statement->execute();
         }
-
     }

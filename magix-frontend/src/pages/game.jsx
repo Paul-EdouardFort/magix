@@ -6,10 +6,9 @@ import Button from "../components/button";
 import Card from "../components/card";
 import Indicator from "../components/indicator";
 import gnomeChild from '/img/Gnome_child_chathead.png';
-//import hpOrb from '../assets/img/Hitpoints_orb.png';
-//import prayerOrb from '../assets/img/Prayer_orb.png';
-//import deck from '../assets/img/Teleport_card.png';
+
 export default function Game() {
+	const navigate = useNavigate();
     const [gameState, setGameState] = useState(null);
     const [gameOngoing, setGameOngoing] = useState(false)
 	const [canMakeAction, setCanMakeAction] = useState(true);
@@ -20,55 +19,8 @@ export default function Game() {
 	const [chatBool, setChatBool] = useState(null);
 	const [chatSrc, setChatSrc] = useState(null);
 	const chatRef = useRef(null);
-	//const [clientTime , setClientTime] = useState(null)
-	//const timeTimeout = useRef(null);
-    const navigate = useNavigate();
 
-    const stateTimeout = useRef(null);
-    const fetchState = () => {
-	fetch("/api/game-state.php")
-	.then(response => response.json())
-	.then(response => {
-		//console.log(response) // <-- État du jeu, ou message comme : LAST_GAME_WON
-		if (stateTimeout.current) clearTimeout(stateTimeout.current);
-		stateTimeout.current = setTimeout(fetchState, 2000);
-       updateGame(response);
-	});
-}
-const updateGame = (response) => {
-	setWarning(null);
-	if (typeof response["result"] !== "object") {
-		if (response["result"] == "WAITING" ){
-			setGameOngoing(null);
-			setInfo("EN ATTENTE D'UN ADVERSAIRE....");
-		}
-		else if(response["result"] == "LAST_GAME_WON"){
-			setGameOngoing(null);
-			setInfo("VOUS AVEZ GAGNÉ!!!!");
-		}
-		else if(response["result"] == "LAST_GAME_LOST"){
-			setGameOngoing(null);
-			setInfo("VOUS AVEZ PERDU....");
-		}
-		else {
-			if (!gameOngoing)
-				setGameOngoing(true);
-			setWarning(response["result"]);
-		}	
-	}
-	else {
-		setGameState(response["result"])
-		
-		setOpponent(heroData(response["result"]["opponent"]["heroClass"]));
-			if (!gameOngoing)
-				setGameOngoing(true);
-	}
-
-		
-    
-}
-
-    useEffect(() => {
+	useEffect(() => {
         fetch("/api/game.php", {
         })
         .then(response => response.json())
@@ -81,21 +33,53 @@ const updateGame = (response) => {
 					stateTimeout.current = setTimeout(fetchState, 10);
 			}
         })
-        
-		//timeTimeout.current = setTimeout(timeUpdate, 1000);
-
         return () => {
             if (stateTimeout.current) clearTimeout(stateTimeout.current);
-			// if (timeTimeout.current) clearTimeout(timeTimeout.current);
         }
-
     }, [])
 
-	/*const timeUpdate = () => {
-		console.log(gameState["remainingTurnTime"])
-		setClientTime(clientTime - 1);
-		timeTimeout.current = setTimeout(timeUpdate, 1000);
-	} */
+    const stateTimeout = useRef(null);
+    const fetchState = () => {
+	fetch("/api/game-state.php")
+	.then(response => response.json())
+	.then(response => {
+		//console.log(response) // <-- État du jeu, ou message comme : LAST_GAME_WON
+		if (stateTimeout.current) clearTimeout(stateTimeout.current);
+		stateTimeout.current = setTimeout(fetchState, 2000);
+       updateGame(response);
+	});
+	}
+	
+	const updateGame = (response) => {
+		setWarning(null);
+		if (typeof response["result"] !== "object") {
+			if (response["result"] == "WAITING" ){
+				setGameOngoing(null);
+				setInfo("EN ATTENTE D'UN ADVERSAIRE....");
+			}
+			else if(response["result"] == "LAST_GAME_WON"){
+				setGameOngoing(null);
+				setInfo("VOUS AVEZ GAGNÉ!!!!");
+			}
+			else if(response["result"] == "LAST_GAME_LOST"){
+				setGameOngoing(null);
+				setInfo("VOUS AVEZ PERDU....");
+			}
+			else {
+				if (!gameOngoing)
+					setGameOngoing(true);
+				setWarning(response["result"]);
+			}	
+		}
+		else {
+			setGameState(response["result"])
+			
+			setOpponent(heroData(response["result"]["opponent"]["heroClass"]));
+				if (!gameOngoing)
+					setGameOngoing(true);
+		}
+	}	
+
     const handleSpec = () => {
         simpleAction("HERO_POWER");
     }
@@ -126,6 +110,7 @@ const updateGame = (response) => {
 			})
 		}
     }
+
     const handlePlayHand = (uid) => {
 		if(canMakeAction){
 			setCanMakeAction(false);
@@ -179,8 +164,7 @@ const updateGame = (response) => {
 		else
 			setChatBool(null);
 	}
-	 const applyStyles = (newHeight = "200px") => {
-        //console.log(newHeight)
+	 const applyStyles = () => {
         let styles = {
             fontColor : "white",
             backgroundColor : "black",
@@ -189,12 +173,12 @@ const updateGame = (response) => {
             hideIcons : true,
             inputBackgroundColor : "red",
             inputFontColor : "yellow",
-            height : "350px", //newHeight , //y'a probablement des meilleures façons
+            height : "350px", //Bug
             padding: "",
             memberListFontColor : "#ff00dd",
             borderColor : "blue",
             memberListBackgroundColor : "white",
-            hideScrollBar: "true", // pour cacher le scroll bar
+            hideScrollBar: "true", 
         }
         
         setTimeout(() => {

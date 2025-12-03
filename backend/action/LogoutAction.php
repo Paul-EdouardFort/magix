@@ -20,6 +20,6 @@ class LogoutAction extends CommonAction {
 
 		$_SESSION["visibility"] = CommonAction::$VISIBILITY_PUBLIC;
 		
-		return compact("result"); // retourne le résultat de ton appel à l'API (result), pour que ton JS le reçoive
+		return compact("result"); 
 	}
 }

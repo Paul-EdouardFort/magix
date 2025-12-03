@@ -11,7 +11,9 @@
             $data = [];
             if(array_key_exists("key",$_SESSION))
                 $key = $_SESSION["key"];
-            else $key = null;
+            else 
+                $key = null;
+
             return compact("key");
         }
     }

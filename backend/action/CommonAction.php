@@ -23,11 +23,6 @@
                 $_SESSION["visibility"] = self::$VISIBILITY_PUBLIC;
 			}
 
-          //  if ($_SESSION["visibility"] < $this->pageVisibility) {
-          //      header("location:index.php");
-		    //		exit;
-          //  }
-
             $data = $this->executeAction();
             $data["authorized"] = $_SESSION["visibility"] >= $this->pageVisibility;
             $data["isLoggedIn"] = $_SESSION["visibility"] > self::$VISIBILITY_PUBLIC;
@@ -36,12 +31,8 @@
             return $data;
         }
 
-        // Template method
         protected abstract function executeAction();
 
-        /**
-     * data = ['key1' => 'value1', 'key2' => 'value2'];
-     */
     protected function callAPI($service, $data) {
     $apiURL = "https://magix.apps-de-cours.com/api/" . $service;
     $result = null;

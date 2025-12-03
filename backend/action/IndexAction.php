@@ -14,7 +14,6 @@
             if ($_POST["username"] && $_POST["password"]){
                 $data["username"] = $_POST["username"];
                 $data["password"] = $_POST["password"];
-
                 $result = parent::callAPI("signin", $data);
                 $error = FALSE;
                 if ($result == "INVALID_USERNAME_PASSWORD") {
@@ -22,15 +21,11 @@
                     $error = TRUE;
                 }
                 else {
-                    // Pour voir les informations retournées : var_dump($result);exit;
                     $key = $result->key;
                     $_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;
                     $_SESSION["key"] = $key;
                 }
-                 
             }
             return compact("key","error");
-
-           
         }
     }

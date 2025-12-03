@@ -2,10 +2,10 @@ import {useEffect,useState,useRef} from "react";
 import Button from "../components/button";
 import { useNavigate } from "react-router";
 export default function Deck() {
+    const navigate = useNavigate();
     const [deckSrc, setDeckSrc] = useState(null);
     const [key, setKey] = useState(null);
 
-    const chatRef = useRef(null);
     useEffect(() => {
         fetch("/api/lobby.php", {
         })
@@ -18,16 +18,13 @@ export default function Deck() {
             console.log(data);
         })
     }, [])
-    const navigate = useNavigate();
     
     const handleBack = () => {
         navigate("/lobby")
     }
     
     return <div className="w-screen h-screen bg-black flex ">  
-    <Button text="Retour" onClick={handleBack} className=" h-[20%] w-[10%] bg-stone-500"></Button>
-    <iframe style={{ width: "100vw", height: "100vh"}} src={deckSrc}>
-              </iframe>
-            
-          </div> 
+        <Button text="Retour" onClick={handleBack} className=" h-[20%] w-[10%] bg-stone-500"></Button>
+        <iframe style={{ width: "100vw", height: "100vh"}} src={deckSrc}></iframe>
+    </div> 
 }

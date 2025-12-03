@@ -14,6 +14,5 @@
             $result = parent::callAPI("games/auto-match", $data);
                  
             return compact("result");
-
         }
     }
