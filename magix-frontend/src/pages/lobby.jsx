@@ -74,7 +74,7 @@ export default function Lobby() {
             hideIcons : true,
             inputBackgroundColor : "red",
             inputFontColor : "yellow",
-            height : "350px", //newHeight , //y'a probablement des meilleures façons
+            height : 350, //y'a probablement des meilleures façons
             padding: "",
             memberListFontColor : "#ff00dd",
             borderColor : "blue",
@@ -103,7 +103,7 @@ export default function Lobby() {
                     <img src="/img/Old_School_RuneScape_logo.png" className="aspect-677/313"></img>
                 </div>
                 {chatSrc && deckSrc ? 
-                (<div className="w-full h-[50%] overflow-hidden bg-white"><iframe width={"100%"} height={"100%"} 
+                (<div className="w-full h-[50%] overflow-hidden bg-black flex flex-col justify-end"><iframe width={"100%"} height={"350px"} 
                 src={chatSrc} onLoad={applyStyles} ref={chatRef}  >
                     </iframe>
                 

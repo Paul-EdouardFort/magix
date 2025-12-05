@@ -173,7 +173,7 @@ export default function Game() {
             hideIcons : true,
             inputBackgroundColor : "red",
             inputFontColor : "yellow",
-            height : "350px", //Bug
+            height : 400, //Bug
             padding: "",
             memberListFontColor : "#ff00dd",
             borderColor : "blue",
@@ -186,7 +186,7 @@ export default function Game() {
     }, 100);
 }
     return <div className="h-screen w-screen bg-[url(/img/map.jpg)] bg-cover bg-no-repeat">
-			{chatBool ? (<div className="absolute w-[25vw] h-[50vh] left-[75vw] top-[20vh] "><iframe width={"100%"} height={"100%"} 
+			{chatBool ? (<div className="absolute w-[25vw] h-[50vh] left-[75vw] top-[20vh] "><iframe width={"100%"} height={"400"} 
                 src={chatSrc} onLoad={applyStyles} ref={chatRef}  >
                     </iframe></div>) : (<div className="absolute"></div>)}
             {gameState ? ( <div className="h-full w-full">
